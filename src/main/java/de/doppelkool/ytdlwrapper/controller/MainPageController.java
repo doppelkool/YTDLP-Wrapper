@@ -16,7 +16,7 @@ public class MainPageController {
 	@GetMapping("/")
 	public String loadPage(Model model) {
 		model.addAttribute("currentDownloads", YtdlwrapperApplication.currentDownloads);
-		model.addAttribute("currentDownloads", YtdlwrapperApplication.finishedDownloads);
+		model.addAttribute("finishedDownloads", YtdlwrapperApplication.finishedDownloads);
 		return "index";
 	}
 }

@@ -22,11 +22,12 @@ public class DownloadController {
 			return "redirect:/";
 		}
 
-		String videoTitle = fetchTitle();
-		YtdlwrapperApplication.currentDownloads.add(new Download(url, videoTitle, "this is a log", 0));
-
-
 		System.out.println("Downloading from URL: " + url);
+
+		String videoTitle = fetchTitle();
+		YtdlwrapperApplication.currentDownloads.add(new Download(url, videoTitle, null));
+
+
 
 		redirectAttributes.addFlashAttribute("currentDownloads", YtdlwrapperApplication.currentDownloads);
 		return "redirect:/";

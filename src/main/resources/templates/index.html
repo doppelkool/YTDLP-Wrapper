@@ -12,11 +12,20 @@
         <div class="card shadow-sm">
             <div class="card-body">
                 <h5 class="card-title text-center">URL Downloader</h5>
-                <form th:action="@{/download}" method="post">
+                <form th:action="@{/download}" method="post" class="needs-validation" novalidate>
                     <div class="mb-3">
-                        <input type="text" class="form-control" id="urlTextbox" name="url" placeholder="Enter URL here...">
-                        <div th:if="${message}" class="list-group-item list-group-item-warning" role="alert">
-                            <span th:text="${message}"></span>
+                        <label for="validationCustom01" class="form-label">URL</label>
+                        <input type="text" class="form-control" id="validationCustom01" name="url" required>
+                        <div class="invalid-feedback">
+                            <ul class="list-unstyled">
+                                <li>Please provide a valid URL. F.e."
+                                    <ul>
+                                        <li>https://www.youtube.com/watch?v=**...</li>
+                                        <li>https://www.youtube.com/playlist?list=**...</li>
+                                        <li>https://www.youtube.com/@**...</li>
+                                    </ul>
+                                </li>
+                            </ul>
                         </div>
                     </div>
                     <div class="d-flex justify-content-end gap-3">
@@ -29,7 +38,7 @@
         <div>
             <div th:if="${currentDownloads != null and !currentDownloads.isEmpty()}">
                 <br>
-                <p class="h2">Current currentDownloads</p>
+                <p class="h2">Current downloads</p>
                 <hr class="hr hr-blurry" />
                 <div th:each="download, iterStat : ${currentDownloads}">
                     <div class="accordion" th:id="'accordion' + ${iterStat.index}">
@@ -59,11 +68,11 @@
                     </div>
                 </div>
             </div>
-            <div th:if="${downloads != null and !downloads.isEmpty()}">
+            <div th:if="${finishedDownloads != null and !finishedDownloads.isEmpty()}">
                 <br>
-                <p class="h2">Current downloads</p>
+                <p class="h2">Finished downloads</p>
                 <hr class="hr hr-blurry" />
-                <div th:each="download, iterStat : ${downloads}">
+                <div th:each="download, iterStat : ${finishedDownloads}">
                     <div class="accordion" th:id="'accordion' + ${iterStat.index}">
                         <div class="accordion-item">
                             <h2 class="accordion-header" th:id="'heading' + ${iterStat.index}">
@@ -104,8 +113,28 @@
                 alert("Failed to read clipboard content: " + err);
             }
         }
+        (function () {
+            'use strict'
+
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.querySelectorAll('.needs-validation')
+
+            // Loop over them and prevent submission
+            Array.prototype.slice.call(forms)
+                .forEach(function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (!form.checkValidity()) {
+                            event.preventDefault()
+                            event.stopPropagation()
+                        }
+
+                        form.classList.add('was-validated')
+                    }, false)
+                })
+        })()
     </script>
 
+    <!--TODO Video Metadata and info-->
     <div class="modal" id="exampleModal" tabindex="-1">
         <div class="modal-dialog">
             <div class="modal-content">

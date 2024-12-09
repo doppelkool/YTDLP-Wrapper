@@ -1,0 +1,36 @@
+.drag-container {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+.drag-item {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    user-select: none; /* Prevent text selection */
+}
+.drop-area {
+    min-height: 50px;
+    display: flex;
+    gap: 10px;
+    border: 2px dashed #007bff;
+    padding: 10px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+.added-item {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border-radius: 5px;
+}
+.remove-btn {
+    margin-left: 10px;
+    cursor: pointer;
+    color: red;
+    font-weight: bold;
+}

@@ -27,14 +27,20 @@ public class YtdlwrapperApplication extends Application {
 
 	@Override
 	public void start(Stage primaryStage) {
+		String downloadPath = System.getenv("download-path");
 		File selectedDirectory;
-		do {
-			DirectoryChooser directoryChooser = new DirectoryChooser();
-			directoryChooser.setTitle("Select Download Folder");
-			selectedDirectory = directoryChooser.showDialog(primaryStage);
-		} while(selectedDirectory == null);
 
-		System.out.println("Selected folder: " + selectedDirectory.getAbsolutePath());
+		if(downloadPath == null) {
+			do {
+				DirectoryChooser directoryChooser = new DirectoryChooser();
+				directoryChooser.setTitle("Select Download Folder");
+				selectedDirectory = directoryChooser.showDialog(primaryStage);
+			} while(selectedDirectory == null);
+		} else {
+			selectedDirectory = new File(downloadPath);
+		}
+
+		System.out.println("Selected folder: " + selectedDirectory.getPath());
 		YtdlwrapperApplication.selectedDownloadDirectory = selectedDirectory;
 	}
 }

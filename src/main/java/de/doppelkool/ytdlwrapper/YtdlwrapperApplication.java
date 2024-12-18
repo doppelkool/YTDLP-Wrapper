@@ -4,7 +4,6 @@ import de.doppelkool.ytdlwrapper.entity.Download;
 import javafx.application.Application;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
-import lombok.Getter;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -14,10 +13,15 @@ import java.util.ArrayList;
 @SpringBootApplication
 public class YtdlwrapperApplication extends Application {
 
+	public static final String tempPath = System.getProperty("java.io.tmpdir");
+
 	public static ArrayList<Download> currentDownloads = new ArrayList<>();
 	public static ArrayList<Download> finishedDownloads = new ArrayList<>();
 
-	@Getter
+	public static File getSelectedDownloadDirectory() {
+		return selectedDownloadDirectory;
+	}
+
 	private static File selectedDownloadDirectory;
 
 	public static void main(String[] args) {
